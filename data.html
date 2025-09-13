@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Date 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+      background: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExejFkZzhvcXM1cWh2MGFhMjV1ems0N2R0Nzdkbmh2YjJ3ZnlvZW5heiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QAF2NDkBi5OdW/giphy.gif') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container { position: relative; width: 300px; height: 200px; cursor: pointer; perspective: 1000px; }
+    .envelope { position: absolute; width: 100%; height: 100%; background: #fff; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); overflow: hidden; transition: transform 1s; transform-style: preserve-3d; }
+    .flap { position: absolute; top: 0; left: 0; width: 100%; height: 50%; background: #ff6b81; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform 1s; z-index: 2; }
+    .envelope.open .flap { transform: rotateX(-180deg); }
+    .card { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); width: 260px; background: #fff0f6; padding: 20px; text-align: center; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); opacity: 0; transition: all 1s ease; z-index: 1; }
+    .envelope.open + .card { top: -80%; opacity: 1; }
+
+    .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer; }
+    .yes { background-color: #ff6b81; color: #fff; }
+    .no { background-color: #ffe3e3; color: #333; position: relative; }
+
+    .result { text-align: center; color: #fff; font-size: 1.5em; padding: 20px; display: none; animation: fadeIn 1s forwards; }
+    .form-container { display: none; background: rgba(255,255,255,0.9); padding: 20px 30px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); animation: fadeIn 1s forwards; max-width: 350px; text-align: left; }
+    .form-container h2 { text-align: center; color: #ff4d6d; margin-bottom: 15px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; color: #ff4d6d; }
+    select, input { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #ffb6c1; }
+    .submit-btn { width: 100%; background: #ff6b81; border: none; padding: 10px; color: #fff; border-radius: 10px; cursor: pointer; font-size: 1em; margin-top: 10px; }
+
+    #finalCard img { border-radius: 10px; width: 100%; max-width: 400px; }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="container">
+    <div class="envelope" id="envelope"><div class="flap"></div></div>
+    <div class="card" id="card">
+      <h2>Will you go on a date with me? 💖</h2>
+      <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExODdxbTFpbGQ0dGxndmp2NmY3cDR1OHM4eGhibXA5NnZ4NGM1dDF5eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ITEdUFjtj1VeyDc4QY/giphy.gif" alt="Cute romantic gif" style="width:100%; border-radius:10px; margin-bottom:15px;">
+      <button class="btn yes">Yes 💕</button>
+      <button class="btn no">No 🙈</button>
+    </div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <div class="form-container" id="formContainer">
+    <h2>💖 Date Preferences 💖</h2>
+    <form id="preferencesForm">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" name="from_name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label>Preferred time of day</label>
+        <select name="time">
+          <option>Morning 🌞</option>
+          <option>Afternoon 🌤️</option>
+          <option>Evening 🌇</option>
+          <option>Night 🌙</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>What activities interest you?</label>
+        <select name="activities" multiple>
+          <option>Movie 🎬</option>
+          <option>Dinner 🍽️</option>
+          <option>Beach walk 🏖️</option>
+          <option>Arcade 🎮</option>
+          <option>Shopping 🛍️</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Food preferences</label>
+        <select name="food">
+          <option>Italian 🍝</option>
+          <option>Indian 🍛</option>
+          <option>Chinese 🍜</option>
+          <option>Mexican 🌮</option>
+          <option>Anything 😋</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Dress code</label>
+        <select name="dress">
+          <option>Casual 👕</option>
+          <option>Trendy 😎</option>
+          <option>Formal 👔</option>
+          <option>Comfy 🧥</option>
+          <option>Saree</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Preferred greeting</label>
+        <select name="greeting">
+          <option>Hug 🤗</option>
+          <option>Handshake 🤝</option>
+          <option>Cheek kiss 💋</option>
+          <option>Big wave 👋</option>
+        </select>
+      </div>
+      <button class="submit-btn" type="submit">Send to Visista 💌</button>
+    </form>
+  </div>
+
+  <div id="finalCard" style="display:none; text-align:center; margin-top:20px;">
+    <h2>💖 Your preferences have been recorded!</h2>
+    <p>Check out this special card from Visista:</p>
+    <img src="https://myimgs.org/storage/images/8148/Pink and White Watercolor Bridal Shower Thank You Card.png" alt="Your Card" style="width:100%; max-width:400px; border-radius:10px;">
+  </div>
+
+  <script>
+    // Envelope open
+    document.getElementById('container').addEventListener('click', () => {
+      document.getElementById('envelope').classList.add('open');
+    });
+
+    // Yes button
+    document.querySelector('.btn.yes').addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.getElementById('container').style.display = "none";
+      const result = document.getElementById('result');
+      result.innerHTML = "🎉 Congratulations on your upcoming date with <strong>Visista</strong>! 💘";
+      result.style.display = "block";
+
+      setTimeout(() => {
+        result.style.display = "none";
+        document.getElementById('formContainer').style.display = "block";
+      }, 2000);
+    });
+
+    // No button hover
+    document.querySelector('.btn.no').addEventListener('mouseover', (e) => {
+      e.target.style.position = "absolute";
+      e.target.style.left = Math.random() * 150 + "px";
+      e.target.style.top = Math.random() * 100 + "px";
+    });
+
+    // Form submit
+    document.getElementById('preferencesForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('formContainer').style.display = "none";
+      document.getElementById('finalCard').style.display = "block";
+    });
+  </script>
+</body>
+</html>
